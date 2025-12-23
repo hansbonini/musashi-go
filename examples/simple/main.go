@@ -68,9 +68,9 @@ func main() {
 	// 1. Load some values into registers
 	// 2. Perform some operations
 	// 3. Loop forever (for now, since we don't have full instruction set)
-	
+
 	programStart := uint32(0x400)
-	
+
 	// For now, just fill with NOPs as placeholder
 	// NOP instruction = 0x4E71
 	for i := uint32(0); i < 0x100; i += 2 {
@@ -78,10 +78,10 @@ func main() {
 	}
 
 	fmt.Println("\nInitializing CPU...")
-	
+
 	// Reset the CPU
 	cpu.Reset()
-	
+
 	fmt.Printf("After reset:\n")
 	fmt.Printf("  PC = 0x%08X\n", cpu.GetPC())
 	fmt.Printf("  SP = 0x%08X\n", cpu.GetSP())
@@ -91,7 +91,7 @@ func main() {
 	cpu.SetRegister(musashi.RegD0, 0x00001234)
 	cpu.SetRegister(musashi.RegD1, 0x00005678)
 	cpu.SetRegister(musashi.RegA0, 0x00002000)
-	
+
 	fmt.Println("\nRegister values before execution:")
 	for i := musashi.RegD0; i <= musashi.RegD7; i++ {
 		fmt.Printf("  D%d = 0x%08X\n", i-musashi.RegD0, cpu.GetRegister(i))
@@ -104,7 +104,7 @@ func main() {
 	fmt.Println("\nExecuting 1000 cycles...")
 	cyclesExecuted := cpu.Execute(1000)
 	fmt.Printf("Executed %d cycles\n", cyclesExecuted)
-	
+
 	fmt.Printf("\nAfter execution:\n")
 	fmt.Printf("  PC = 0x%08X\n", cpu.GetPC())
 	fmt.Printf("  Cycles run = %d\n", cpu.CyclesRun())

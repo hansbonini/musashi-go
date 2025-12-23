@@ -307,22 +307,8 @@ func (cpu *CPU) executeInstruction() {
 	cpu.ir = cpu.memory.Read16(cpu.pc)
 	cpu.pc += 2
 
-	// For now, just consume minimum cycles
-	// Full instruction implementation will be added in subsequent phases
-	cpu.useCycles(4)
-
-	// Placeholder: Handle basic NOP and reset instructions
-	switch cpu.ir {
-	case 0x4E71: // NOP
-		// Do nothing, already consumed cycles
-	case 0x4E70: // RESET
-		if cpu.resetCallback != nil {
-			cpu.resetCallback()
-		}
-	default:
-		// Unknown instruction - will be implemented in instruction phase
-		// For now, just skip it
-	}
+	// Decode and execute
+	cpu.decodeAndExecute(cpu.ir)
 }
 
 // checkInterrupts checks for pending interrupts and handles them if needed
